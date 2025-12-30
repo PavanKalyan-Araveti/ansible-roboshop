@@ -44,7 +44,7 @@
 
   - name: extract catalogue application
     ansible.builtin.unarchive:
-      path: /tmp/catalogue.zip
+      src: /tmp/catalogue.zip
       dest: /app
       remote_src: yes
 
@@ -66,7 +66,7 @@
     ansible.builtin.package:
       name: mongodb-mongosh
       state: present
-      
+
   - name: connect to mongodb catalogue
     ansible.builtin.command: mongosh mongodb.apavan.space --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
     register: catalogue_output
