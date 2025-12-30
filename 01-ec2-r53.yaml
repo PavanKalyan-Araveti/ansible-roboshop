@@ -6,11 +6,11 @@
     sg_id: sg-0d9388090da2dfd31
     zone_id: Z0308638110W1D2GQJNZ2
     domain_name: apavan.space
-    instances:
-    - mongodb
-    - redis
-    - mysql
-    - rabbitmq
+    # instances:  # we can pass instances through command line using -e
+    # - mongodb
+    # - redis
+    # - mysql
+    # - rabbitmq
   tasks:
     - name: Create ec2 instance
       amazon.aws.ec2_instance:
