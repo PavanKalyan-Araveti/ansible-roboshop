@@ -1,0 +1,30 @@
+- name: Create ec2 and r53
+  hosts: local
+  connection: local
+  vars:
+    ami_id: ami-09c813fb71547fc4f
+    sg_id: sg-0d9388090da2dfd31
+    zone_id: Z0308638110W1D2GQJNZ2
+    domain_name: apavan.space
+    instances:
+    - mongodb
+  tasks:
+    - name: Create ec2 instance
+      amazon.aws.ec2_instance:
+        name: "{{ item }}"
+        instance_type: t3.micro
+        security_group: "{{ sg_id }}"
+        image_id: "{{ ami_id }}"
+        tags:
+          Name: "{{ instances }}"
+      loop: "{{ instances }}"
+      register: ec2_output
+
+    - name: print ec2 output
+      ansible.builtin.debug:
+        msg: "{{ ec2_output }}"
+
+    # - name: print public ip
+    #   ansible.builtin.debug:
+    #     msg" "{{ }}"
+    #   loop: "{{ ec2_output.results }}"
